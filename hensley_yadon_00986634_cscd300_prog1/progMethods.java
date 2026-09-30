@@ -1,6 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.util.*;
 
 public class progMethods {
     
@@ -62,23 +62,36 @@ public class progMethods {
 
     }
 
-    public int[] writeArray(String fileName) throws FileNotFoundException {
+    public double[] writeArray(String fileName) throws FileNotFoundException {
 
         File file = new File(fileName);
-        int[] array;
+        double[] array = null;
+        ArrayList<Double> tempList = new ArrayList<>();
 
         if (!file.exists()) {
+
             throw new FileNotFoundException("File does not exist");
+
         }
 
         Scanner numReader = new Scanner(file);
 
         while (numReader.hasNext()) {
 
+            tempList.add(numReader.nextDouble());
+
+        }
+
+        array = new double[tempList.size()];
+
+        for (int i = 0; i < tempList.size(); i++) {
+
+            array[i] = tempList.get(i);
             
         }
 
-        return new int[0];
+        numReader.close();
+        return array;
     }
 
 }
