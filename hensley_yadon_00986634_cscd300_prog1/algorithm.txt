@@ -1,0 +1,8 @@
+I used two separate binary searches to find the left/right most indices to deduce an inclusive range where the given values occur.
+
+Leftmost (s): Utilizes the floor function to compute a mid based on the length of the array. Finds the index of the first value that is >= left (given low value of range). Once it locates this value, it compares A[mid] to left. If A[mid] < left, the value must be to the right, so it cuts the array in half by setting low = mid + 1. If A[mid] >= left, the program first checks if mid is 0 to determine if we are just at the first index. If not, it checks if the left neighbor is smaller to determine if we are at the leftmost index. If neither are true, high is set to mid - 1 and the process repeats. 
+
+Rightmost (t): A mirrored version of the leftmost search. Checks whether A[mid] > right, and halves it by setting high = mid - 1 if true. If A[mid] <= right it checks if mid == A.length - 1 to determine if we are at the last index. If not, it checks the right neighbor and sets low = mid + 1 if the right neighbor is not greater. 
+
+The time cost of the search algorithm is O(log n). The program performs two binary search algorithms: O(log n) + O(log n) = 2 * O(log n). We can drop the constant to get O(log n).
+However, the time cost of the entire program is O(n), due to the function that writes an array from the data file. The time cost grows linearly with the size of the file.
