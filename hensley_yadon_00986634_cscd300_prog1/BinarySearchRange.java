@@ -90,6 +90,7 @@ public class BinarySearchRange {
 
     }
 
+    //Method to find rightmost occurrence
     public double BinarySearchT(double[] A, double t) {
 
         double low = 0;    
