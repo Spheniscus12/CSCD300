@@ -102,7 +102,7 @@ public class BestTrading {
             return can1;
         }
 
-        //Helper method to return trade object that holds data of: lowest value from first half, highest value from right half, profit
+        //Helper method to return trade object that holds data of: lowest value from left half, highest value from right half, profit
         private Trade bestTradeAcross(double[] p, int low, int high) {
 
             if (low >= high) {
