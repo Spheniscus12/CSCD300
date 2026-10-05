@@ -10,7 +10,7 @@ public class BestTrading {
     public static void main(String[] args) {
 
         //Sanitize command line input
-        if (args.length > 1) {
+        if (args.length != 1) {
             System.out.println("Invalid input. Please try again.");
             System.out.println("Program usage: java BestTrading.java <file>");
             return;
@@ -41,53 +41,49 @@ public class BestTrading {
     //Static subclass to hold methods
     static class TradeMethods {
 
-        public double[] writeArray(String fileName) throws FileNotFoundException {
+            public double[] writeArray(String fileName) throws FileNotFoundException {
 
 
-        File file = new File(fileName);
+            File file = new File(fileName);
 
-        //This method will use an array list to store the elements. 
-        //This will help determine the size of the regular array as well as allow manipulation of them later if needed.
-        ArrayList<Double> tempList = new ArrayList<>();
+            //This method will use an array list to store the elements. 
+            //This will help determine the size of the regular array as well as allow manipulation of them later if needed.
+            ArrayList<Double> tempList = new ArrayList<>();
 
-        if (!file.exists()) {
+            if (!file.exists()) {
 
-            throw new FileNotFoundException("File does not exist");
-
-        }
-
-        Scanner numReader = new Scanner(file);
-
-        
-        while (numReader.hasNext()) {
-
-            //Ensure other data types are not consumed
-            if (numReader.hasNextDouble()) {
-
-                tempList.add(numReader.nextDouble());
+                throw new FileNotFoundException("File does not exist");
 
             }
-            else {
-                numReader.next();
-            }
 
-        }
-
-
-        double[] array = new double[tempList.size()];
-
-        //Fill array
-        for (int i = 0; i < tempList.size(); i++) {
-
-            array[i] = tempList.get(i);
-            
-        }
+            Scanner numReader = new Scanner(file);
 
         
-        numReader.close();
-        return array;
+            while (numReader.hasNext()) {
 
-        }
+                //Ensure other data types are not consumed
+                if (numReader.hasNextDouble()) {
+                    tempList.add(numReader.nextDouble());
+                }
+                else {
+                    numReader.next();
+                }
+
+            }
+
+
+            double[] array = new double[tempList.size()];
+
+            //Fill array
+            for (int i = 0; i < tempList.size(); i++) {
+                array[i] = tempList.get(i);
+            }
+
+        
+            numReader.close();
+            return array;
+
+            }
 
         //Static subclass to create objects that hold data of each BestTrade call
         static class Trade {
