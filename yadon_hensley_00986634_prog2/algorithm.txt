@@ -1,3 +1,16 @@
 Author: Yadon Hensley
 
+This program uses a binary recursive algorithm to return the best trade data.
 
+Each bestTrade call has 2 recursive calls, splitting the array in half until it reaches the base case where the buy day is the same as the sell day.
+This can be represented as T(n) = 2T(n/2), where n is the size of the array. 
+The amount of steps is determined by how many times the array must be cut in half.
+
+n -> n/2 -> n/4 -> n/8 ... -> 1
+
+If n/2^k = 1, n = 2^k, k = log2 n
+
+Similar to BinarySearch, this process of halving the array gives us a time complexity of O(log n).
+However, since the bestTradeAcross method iteratively walks through the entire length of the array each call, we have to add the O(n) time from this process.
+
+Added together, the time complexity of the program is O(n log n).
