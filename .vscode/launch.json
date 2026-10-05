@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "BestTrading",
+            "request": "launch",
+            "mainClass": "BestTrading",
+            "projectName": "CSCD300_34c612cd"
+        },
+        {
+            "type": "java",
+            "name": "Run Current Java File",
+            "request": "launch",
+            "mainClass": "group3.${fileBasenameNoExtension}",
+            "cwd": "${workspaceFolder}",
+            "classPaths": [
+                "${workspaceFolder}/myClassFiles"
+            ]
+        }
+    ]
+}

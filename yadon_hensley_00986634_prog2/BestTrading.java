@@ -1,11 +1,39 @@
 import java.io.*;
 import java.util.*;
 
+/**
+ * @author Yadon Hensley
+ * BestTrading 
+ */
 public class BestTrading {
 
     public static void main(String[] args) {
 
+        //Sanitize command line input
+        if (args.length > 1) {
+            System.out.println("Invalid input. Please try again.");
+            System.out.println("Program usage: java BestTrading.java <file>");
+            return;
+        }
+
+        String file = args[0];
+        double[] p = null;
+
         TradeMethods tm = new TradeMethods();
+
+        try {
+            p = tm.writeArray(file);
+        } catch (FileNotFoundException e) {
+            System.out.println("File does not exist");
+            return;
+        }
+
+        if (p.length == 0) {
+            System.out.println("Data file is empty");
+            return;
+        }
+
+        System.out.println(tm.bestTrade(p, 0, p.length - 1));
 
 
     }
@@ -77,7 +105,7 @@ public class BestTrading {
 
             @Override
             public String toString() {
-                return "[" + buy + "," + sell + ",$" + profit + "]"; //For printing Trade object to command line: [buy,sell,$profit]
+                return "[" + buy + "," + sell + ",$" + String.format("%.2f", profit) + "]"; //For printing Trade object to command line: [buy,sell,$profit]
             }
         }
 
@@ -94,12 +122,23 @@ public class BestTrading {
 
             int mid = (low + high) / 2;
 
-            Trade can1 = bestTrade(p, low, mid);
-            Trade can2 = bestTrade(p, mid + 1, high);
+            Trade cand1 = bestTrade(p, low, mid);
+            Trade cand2 = bestTrade(p, mid + 1, high);
+            Trade cand3 = bestTradeAcross(p, low, high);
 
+            //Compare profit fields to return best trade each time
+            if (cand1.profit >= cand2.profit && cand1.profit >= cand3.profit) {
+                return cand1;
+            }
 
+            else if(cand2.profit >= cand1.profit && cand2.profit >= cand3.profit) {
+                return cand2;
+            }
 
-            return can1;
+            else {
+                return cand3;
+            }
+
         }
 
         //Helper method to return trade object that holds data of: lowest value from left half, highest value from right half, profit
